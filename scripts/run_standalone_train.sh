@@ -30,6 +30,6 @@ get_real_path(){
 CONFIG_PATH=$(get_real_path $1)
 BASE_PATH=$(cd ./"`dirname $0`" || exit; pwd)
 cd $BASE_PATH/..
-python train.py --config_path=$CONFIG_PATH --device_id=$2 > standalone_train.txt 2>&1 &
+python train.py --config_path=$CONFIG_PATH --device_id=$2 > standalone_train_Coco.txt 2>&1 &
 echo "training..."
 echo "log at standalone_train.txt, you can use [tail -f standalone_train.txt] to get log."

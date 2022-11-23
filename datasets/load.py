@@ -460,6 +460,7 @@ class CocoTextDataloader(DataLoader):
             dontcare = np.array(dontcare, dtype=np.bool8)
 
         if self.config['dataset']['is_show']:
+            # print(img_path)
             cv2.imwrite('./images/img.jpg', img)
             cv2.imwrite('./images/gt.jpg', gt[0] * 255)
             cv2.imwrite('./images/gt_mask.jpg', gt_mask * 255)
@@ -486,7 +487,9 @@ def create_dataset(config, is_train):
     ds.config.set_prefetch_size(config["dataset"]["prefetch_size"])
     data_loader = eval(config['dataset']['class'])(config, isTrain=is_train)
 
-    # print(data_loader[1])
+    
+    # for i in range(1000):
+    #     data_loader[i]
     # print(data_loader[1][2])
     # print(data_loader[1][2].dtype)
 
@@ -523,28 +526,29 @@ def TotalText_eval_dic_iter(config):
 if __name__ == '__main__':
     os.environ["OPENBLAS_NUM_THREADS"] = "1"
     cv2.setNumThreads(2)
-    stream = open('./config/icdar2015/dbnet/config_resnet18_1p.yaml', 'r', encoding='utf-8')
+    stream = open('./config/CocoText/dbnet/config_resnet18_1p.yaml', 'r', encoding='utf-8')
     config = yaml.load(stream, Loader=yaml.FullLoader)
     stream.close()
 
-    iters = TotalText_eval_dic_iter(config)
+    # iters = TotalText_eval_dic_iter(config)
 
     count = 0
     avg = 0
     epochs = 1
 
-    # dataset, _ = create_dataset(config, False)
+    dataset, _ = create_dataset(config, True)
     
-    # iters = dataset.create_dict_iterator(num_epochs=epochs)
-    # next(iters)
+    iters = dataset.create_dict_iterator(num_epochs=epochs)
+    next(iters)
+    next(iters)
 
-    import time
-    start = time.time()
-    for it in iters:
-        if count > 1:
-            cost = time.time() - start
-            avg += cost
-            print(f"time cost: {cost}, avg: {avg / (count - 1)}, count: {count}", flush=True)
-        count += 1
-        start = time.time()
+    # import time
+    # start = time.time()
+    # for it in iters:
+    #     if count > 1:
+    #         cost = time.time() - start
+    #         avg += cost
+    #         print(f"time cost: {cost}, avg: {avg / (count - 1)}, count: {count}", flush=True)
+    #     count += 1
+    #     start = time.time()
 

@@ -7,7 +7,7 @@ context_mode: "graph"
 mix_precision: True
 backbone:
     initializer: resnet18
-    pretrained: True
+    pretrained: False
     pretrained_ckpt: "/old/zhaoting/resnet18-5c106cde.ckpt"
 segdetector:
     in_channels: [64, 128, 256, 512]  #R50: [256, 512, 1024, 2048]  R18: [64, 128, 256, 512]
@@ -33,7 +33,7 @@ optimizer:
 dataset:
     class: CocoTextDataloader
     annotations_path: "/old/wjf/test_CocoText/coco-text/COCO_Text.json"
-    is_show: False
+    is_show: True
     is_icdar2015: True
     num_workers: 12
     prefetch_size: 12
@@ -45,8 +45,8 @@ dataset:
 train:
     img_format: '.jpg'
     img_dir: "/mass_store/dataset/coco_2014/coco/train2014"
-    is_continue_training: False
-    last_ckpt_path: ""
+    is_continue_training: True
+    last_ckpt_path: "/old/wlh/DBnetpp_mindspore/checkpoints/imagenet_PretrainedCkpt/R18_Synthtext_pretrained_weight.ckpt"
     start_epoch_num: 0
     total_epochs: 1200
     batch_size: 16
