@@ -6,6 +6,7 @@ from mindspore.common.initializer import HeNormal
 
 import math
 import sys
+import mindspore as ms
 
 sys.path.insert(0, '.')
 
@@ -70,18 +71,19 @@ class BasicBlock(nn.Cell):
         # print(x.shape)
 
         out = self.conv1(x)
-        # print("conv1 ",out[0][0][0][:5])
+        # print("=================== after block conv  ======================")
+        # print(out[0][0][0][:5])
 
         out = self.bn1(out)
-        # print("bn1 ",out[0][0][0][:5])
+        # print("=================== after block bn1  ======================")
+        # print(out[0][0][0][:5])
 
         out = self.relu(out)
-        # print("relu1 ",out[0][0][0][:5])
+
         if self.with_dcn:
 
             conv2_offset = self.conv2_offset(out)
-            # print(self.conv2_weight.size)
-            # print('out.shape:{}'.format(out.shape))
+
             out = self.DCN(out, self.conv2_weight, conv2_offset,
                            kernel_size=(3, 3), strides=(1, 1, 1, 1), padding=(1, 1, 1, 1))
 
@@ -117,7 +119,6 @@ class Bottleneck(nn.Cell):
         fallback_on_stride = False
         self.with_modulated_dcn = False
         if self.with_dcn:
-            import mindspore as ms
             from mindspore import Tensor, Parameter
             from mindspore.ops import deformable_conv2d
             from mindspore.common.initializer import HeNormal
@@ -233,9 +234,16 @@ class ResNet(nn.Cell):
 
     def construct(self, x):
         x = self.conv1(x)
+        # print("=================== 1  ======================")
+        # print(x[0][0][0][:5])
         x = self.bn1(x)
+        # print("=================== 2  ======================")
+        # print(x[0][0][0][:5])
         x = self.relu(x)
+        # print("=================== 3  ======================")
+        # print(x[0][0][0][:5])
         x = self.maxpool(x)
+
         x2 = self.layer1(x)
         x3 = self.layer2(x2)
         x4 = self.layer3(x3)

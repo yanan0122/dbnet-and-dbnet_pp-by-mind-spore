@@ -524,6 +524,8 @@ def TotalText_eval_dic_iter(config):
 
 
 if __name__ == '__main__':
+    import mindspore as  ms
+    ms.set_context(mode=ms.PYNATIVE_MODE, device_target="Ascend", device_id=6)
     os.environ["OPENBLAS_NUM_THREADS"] = "1"
     cv2.setNumThreads(2)
     stream = open('./config/CocoText/dbnet/config_resnet18_1p.yaml', 'r', encoding='utf-8')
@@ -545,6 +547,7 @@ if __name__ == '__main__':
     # import time
     # start = time.time()
     # for it in iters:
+    #     print(it["img"].shape)
     #     if count > 1:
     #         cost = time.time() - start
     #         avg += cost

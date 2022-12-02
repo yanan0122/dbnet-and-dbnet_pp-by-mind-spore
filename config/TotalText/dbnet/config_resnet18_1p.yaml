@@ -6,7 +6,7 @@ device_target: "Ascend"
 context_mode: "graph"
 mix_precision: True
 backbone:
-    initializer: resnet18
+    initializer: deformable_resnet18
     pretrained: False
     pretrained_ckpt: "/old/zhaoting/resnet18-5c106cde.ckpt"
 segdetector:
@@ -32,7 +32,7 @@ optimizer:
     weight_decay: 0.0001
 dataset:
     class: TotalTextDataloader
-    is_show: False
+    is_show: True
     is_icdar2015: True
     num_workers: 12
     prefetch_size: 12
@@ -66,7 +66,7 @@ eval:
     show_images: True
     image_dir: './outputs_test/'
     thresh: 0.3
-    box_thresh: 0.55
+    box_thresh: 0.7
     max_candidates: 1000
     unclip_ratio: 1.5
     polygon: True

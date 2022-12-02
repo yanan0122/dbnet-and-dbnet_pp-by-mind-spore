@@ -42,12 +42,12 @@ class WithEvalCell:
 
         for batch in tqdm(dataset):
             # for batch in dataset:
-            print(f"start compute time: {time.asctime()}")
+            # print(f"start compute time: {time.asctime()}")
             raw_metric, (cur_frame, cur_time) = self.once_eval(batch)
-            print(
-                f"Recall: {raw_metric['recall']}\n"
-                f"Precision: {raw_metric['precision']}")
-            print(f"end compute time: {time.asctime()}\n")
+            # print(
+            #     f"Recall: {raw_metric['recall']}\n"
+            #     f"Precision: {raw_metric['precision']}")
+            # print(f"end compute time: {time.asctime()}\n")
             raw_metrics.append(raw_metric)
 
             total_frame += cur_frame
