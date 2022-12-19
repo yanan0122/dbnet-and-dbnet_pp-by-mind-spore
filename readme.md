@@ -4,7 +4,17 @@
 
  同时，代码也适配了TotalText和cocotext两个数据集，config文件中提供了相应的配置。
 
+# 精度
 
+| 模型           | Pretrained Model | Training set    | Test set       | epochs | Recall | Precision | Fmeasure |
+| -------------- | ---------------- | --------------- | -------------- | ------ | ------ | --------- | -------- |
+| DBNet_resnet18 | ImageNet         | ICDAR2015 Train | ICDAR2015 Test | 1200   | 0.778  | 0.839     | 0.808    |
+
+预训练模型与精度达标模型的checkpoint下载：百度网盘
+
+https://pan.baidu.com/s/1qLbf6uaUT7_9bpeBP6Zs8w?pwd=giu4
+
+提取码：giu4 
 
 # DBNet描述
 
