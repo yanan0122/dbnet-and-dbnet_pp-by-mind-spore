@@ -1,4 +1,8 @@
-[TOC]
+# 仓库介绍
+
+本项目同时用MindSpore框架同时实现了dbnet和dbnet++两个模型。dbnet模型没有dcn算子时，模型在icdar2015上测试的精度可以达标。由于框架dcn算子好像存在一些问题，当加入dcn算子时，精度不达标。
+
+ 同时，代码也适配了TotalText和cocotext两个数据集，config文件中提供了相应的配置。
 
 
 
